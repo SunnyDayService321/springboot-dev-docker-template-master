@@ -1,0 +1,44 @@
+# 共通、あるいはログイン用のPayloadデータのまとまり（Payload）の定義
+type Payload {
+  token: String
+  user: User
+}
+
+# ユーザー情報の定義
+type User {
+  id: ID!
+  email: String!
+  createdAt: String
+  updatedAt: String
+}
+
+# データの更新・登録
+type Mutation {
+  # ログイン処理の定義
+  login(email: String!, password: String!): Payload
+  
+  # 新規追加：登録処理 
+  register(input: RegisterInput!): Payload
+  
+  # 会員情報更新
+  updateProfile(input: UpdateProfileInput!): User
+}
+
+# 取得処理（必須なので空でも定義）
+type Query {
+  me: User
+}
+
+# 入力用（Input）- 新規登録
+input RegisterInput {
+  email: String!
+  password: String!
+  passwordConfirm: String!
+}
+
+# 入力用（Input）- 会員情報更新
+input UpdateProfileInput {
+  email: String
+  password: String
+  passwordConfirm: String
+}

@@ -7,7 +7,7 @@ services:
       - ./environments/db.env
     volumes:
       # 相対パスに戻す（EC2内の実行ディレクトリからの相対パスになります）
-      - ./volumes/db/data:/var/lib/mysql
+      - ../volumes/db/data:/var/lib/mysql
     ports:
       - 3306:3306
   app:
@@ -20,9 +20,9 @@ services:
     command: /app/mvnw clean spring-boot:run
     volumes:
       # EC2上のカレントディレクトリからの相対パスに書き換え
-      - ./volumes/app:/app
-      - ./volumes/app/.m2:/root/.m2
-      - ./volumes/web/static:/app/src/main/resources/static
+      - ../volumes/app:/app
+      - ../volumes/app/.m2:/root/.m2
+      - ../volumes/web/static:/app/src/main/resources/static
     ports:
       - 8080:8080
     depends_on:
@@ -32,9 +32,9 @@ services:
     env_file:
       - ./environments/common.env
     volumes:
-      - ./volumes/web/static:/usr/share/nginx/www/
-      - ./volumes/web/ssl:/etc/nginx/cert/
-      - ./volumes/web/log:/var/log/nginx/
+      - ../volumes/web/static:/usr/share/nginx/www/
+      - ../volumes/web/ssl:/etc/nginx/cert/
+      - ../volumes/web/log:/var/log/nginx/
     ports:
       - 80:80 # EC2では443(HTTPS)の前にまず80(HTTP)で繋がるか確認しましょう
       - 443:443

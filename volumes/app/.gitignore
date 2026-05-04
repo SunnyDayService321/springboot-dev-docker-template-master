@@ -36,3 +36,25 @@ volumes/web/ssl/server.crt
 
 # 環境変数ファイルを無視
 environments/*.env
+
+# --- Docker Data (MySQLの実データは絶対に含めない) ---
+# docker-compose.yml から見て一つ上の volumes を指定する場合
+volumes/db/data/
+# 実行ログも不要
+volumes/web/log/
+
+# --- Maven / Java Build ---
+# ビルド済みのバイナリや一時ファイルを除外
+target/
+*.class
+
+# --- Security / Environment ---
+# SSL証明書と秘密鍵（ディレクトリごと無視するのが安全です）
+volumes/web/ssl/*
+# dockerディレクトリ内にある環境変数ファイル
+docker/environments/*.env
+
+# --- OS / IDE ---
+.DS_Store
+.idea/
+.vscode/

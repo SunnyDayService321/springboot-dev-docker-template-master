@@ -4,3 +4,130 @@ volumes/db/data/
 volumes/app/.m2/
 **/.m2/
 volumes/db/data/
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+# SSL/TLS Private Keys
+volumes/web/ssl/privkey.pem
+volumes/web/ssl/server.crt
+
+# 環境変数ファイルを無視
+environments/*.env
+
+# --- Docker Data (MySQLの実データは絶対に含めない) ---
+# docker-compose.yml から見て一つ上の volumes を指定する場合
+volumes/db/data/
+# 実行ログも不要
+volumes/web/log/
+
+# --- Maven / Java Build ---
+# ビルド済みのバイナリや一時ファイルを除外
+target/
+*.class
+
+# --- Security / Environment ---
+# SSL証明書と秘密鍵（ディレクトリごと無視するのが安全です）
+volumes/web/ssl/*
+# dockerディレクトリ内にある環境変数ファイル
+docker/environments/*.env
+
+# --- OS / IDE ---
+.DS_Store
+.idea/
+.vscode/
+
+# DBデータ (絶対に上げない)
+**/volumes/db/data/
+*.ibd
+*.frm
+*.opt
+ib_buffer_pool
+
+# ログとSSL
+**/volumes/web/log/
+**/volumes/web/ssl/
+
+# Javaのビルドファイル
+**/target/
+*.class
+
+# 環境変数 (dockerフォルダ内のものも含む)
+**/*.env
+
+# Mac固有
+.DS_Store
+
+# DBデータ
+**/volumes/db/data/
+*.ibd
+*.frm
+*.opt
+ib_buffer_pool
+
+# ログとSSL鍵
+**/volumes/web/log/
+**/volumes/web/ssl/
+
+# Javaビルド生成物
+**/target/
+*.class
+
+# 環境変数 (docker内の階層も含む)
+**/*.env
+
+# Mac/IDE
+.DS_Store
+.idea/
+.vscode/
+/.metadata/
+
+# --- Git に含めるもの (ソースコードなど) ---
+HELP.md
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS / IntelliJ / NetBeans ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+*.iws
+*.iml
+*.ipr
+/nbproject/private/
+/nbbuild/
+build/

@@ -1,0 +1,212 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マイページ - TechShop Demo</title>
+<link rel="stylesheet" media="all" th:href="@{/css/ress.min.css}" />
+<link rel="stylesheet" media="all" th:href="@{/css/style.css}" />
+<script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/js/style.js}"></script>
+<script th:src="@{/js/profile.js}"></script>
+<script th:src="@{/js/logout.js}"></script>
+
+<link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
+
+<style>
+    /* プロフィール表示用の簡易スタイル */
+    .profile-info {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    .profile-item {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    .profile-label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        font-size: 0.9em;
+    }
+    .profile-value {
+        font-size: 1.1em;
+        color: #555;
+    }
+	
+	/* 更新フォームのスタイル */
+    .update-form {
+        background: #fff;
+        padding: 20px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        margin-top: 30px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .error-message {
+        color: #d9534f;
+        background: #f2dede;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        display: none;
+    }
+    .success-message {
+        color: #3c763d;
+        background: #dff0d8;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col span-12">
+                    <div class="head">
+                        <h1>
+                            <a th:href="@{/}">TechShop Demo</a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col span-12">
+                    <nav>
+                        <div id="open">
+                            <img th:src="@{/img/button.png}">
+                        </div>
+                        <div id="close">
+                            <img th:src="@{/img/button2.png}">
+                        </div>
+                        <div id="navi">
+                            <ul>
+                                <li><a th:href="@{/}">ホーム</a></li>
+                                <li><a th:href="@{/form}">お問い合わせ</a></li>
+                                <li><strong><a th:href="@{/account/profile}">マイページ</a></strong></li>
+								<li><a href="javascript:void(0)" onclick="performLogout()">ログアウト</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="mainimg">
+        <img th:src="@{/img/subimg.jpg}" alt="マイページ画像">
+    </div>
+
+    <main>
+        <article>
+            <div class="container">
+                <div class="row">
+                    <div class="col span-12">
+                        <div class="breadcrumb">
+                            <ul>
+                                <li><a th:href="@{/}">ホーム</a> > マイページ</li>
+                            </ul>
+                        </div>
+
+                        <h2 class="underline">会員情報（マイページ）</h2>
+                        
+                        <div class="profile-info" th:if="${user}">
+                            <div class="profile-item">
+                                <span class="profile-label">ユーザーID</span>
+                                <span class="profile-value" th:text="${user.id}">1</span>
+                            </div>
+                            
+                            <div class="profile-item">
+                                <span class="profile-label">メールアドレス</span>
+                                <span class="profile-value" th:text="${user.email}">example@test.com</span>
+                            </div>
+                            
+                            <div class="profile-item">
+                                <span class="profile-label">登録日時</span>
+                                <span class="profile-value" th:text="${user.createdAt}">2026-03-06T00:00:00Z</span>
+                            </div>
+                            
+                            <div class="profile-item">
+                                <span class="profile-label">最終更新日時</span>
+                                <span class="profile-value" th:text="${user.updatedAt}">2026-03-06T00:00:00Z</span>
+                            </div>
+                        </div>
+						
+						<!-- 更新フォームの再実装 -->
+                        <div class="update-form" th:if="${user}">
+                            <h3 style="margin-bottom: 15px;">会員情報の変更</h3>
+                            
+                            <!-- メッセージ表示エリア -->
+                            <div id="errorBox" class="error-message"></div>
+                            <div id="successBox" class="success-message"></div>
+
+                            <div class="form-group">
+                                <label for="email">新しいメールアドレス</label>
+                                <input type="email" id="email" placeholder="example@test.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">新しいパスワード</label>
+                                <input type="password" id="password" placeholder="8文字以上">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="passwordConfirm">パスワード確認</label>
+                                <input type="password" id="passwordConfirm" placeholder="再入力してください">
+                            </div>
+                            
+                            <button type="button" onclick="handleUpdateProfile()" class="button" style="width: 100%; margin-top: 10px;">
+                                情報を更新する
+                            </button>
+                        </div>
+
+                        <div th:unless="${user}">
+                            <p>情報を取得できませんでした。再度ログインしてください。</p>
+                        </div>
+                        
+                        <p style="margin-top: 20px;">
+                            <a th:href="@{/}" class="button">ホームへ戻る</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col span-12">
+                    <h5>お知らせ</h5>
+                    <p>電話での問合せは承っておりません。</p>
+                    <p>回答にお時間頂くことがございます。予めご了承ください。</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <p id="pagetop">
+        <a href="#">TOP</a>
+    </p>
+</body>
+</html>
