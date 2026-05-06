@@ -23,5 +23,5 @@ jobs:
 
     - name: Build with Maven
       # コンパイルとテストを実行して、アプリが壊れていないか確認する
-      working-directory: ./springboot-dev-docker-template-master
+      working-directory: ./springboot-dev-docker-template-master/app
       run: mvn -B clean package
