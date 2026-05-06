@@ -21,5 +21,7 @@ jobs:
         distribution: 'temurin'
         cache: maven             # 2回目以降のビルドを速くする
 
-    - name: Check directory structure
-      run: ls -R
+    - name: Build with Maven
+      # コンパイルとテストを実行して、アプリが壊れていないか確認する
+      working-directory: ./volumes/app
+      run: mvn -B clean package
