@@ -67,3 +67,33 @@ docker フォルダへ移動し、ビルドと起動を行います。
 ```bash
 cd docker
 docker-compose up -d --build
+
+---
+
+## 📄 設計書
+
+### 概要
+
+| ドキュメント | リンク |
+|---|---|
+| API設計書 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=399766951&single=true) |
+| テーブル設計書 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1715944819&single=true) |
+
+### 認証機能 (Auth)
+
+| ID | リンク |
+|---|---|
+| U-AUTH-01 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=2073395594&single=true) |
+| GQL-AUTH-01 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=2110589985&single=true) |
+| U-AUTH-02 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1267559647&single=true) |
+| GQL-AUTH-02 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1792508397&single=true) |
+| U-AUTH-03 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1647465993&single=true) |
+| GQL-AUTH-03 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=264587808&single=true) |
+| U-AUTH-04 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=843175570&single=true) |
+| GQL-AUTH-04 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1324166686&single=true) |
+| U-AUTH-05 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=109669780&single=true) |
+| GQL-AUTH-05 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1507221397&single=true) |
+| U-AUTH-06 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=980873209&single=true) |
+| GQL-AUTH-06 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=323420372&single=true) |
+| U-AUTH-07 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=592837783&single=true) |
+| GQL-AUTH-07 | [開く](https://docs.google.com/spreadsheets/d/e/2PACX-1vTU1PbsjCDuRHhcvXMfrk272WkEcpwgdXkt6ZVyRHQN79HNEVZQXpuTdjl5huI_fEw9vpnlNHsv9OFh/pubhtml?gid=1719348868&single=true) |
