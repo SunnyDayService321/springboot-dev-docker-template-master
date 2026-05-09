@@ -67,6 +67,7 @@ docker フォルダへ移動し、ビルドと起動を行います。
 ```bash
 cd docker
 docker-compose up -d --build
+```
 
 ---
 
