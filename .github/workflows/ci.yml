@@ -44,8 +44,8 @@ jobs:
 
         # 3. EC2上でアプリを起動（既存のプロセスを止めて再起動する例）
         ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} << 'EOF'
-          # 古いアプリが動いていたら終了させる
-          pgrep -f app.jar | xargs -r kill -9
-          # アプリをバックグラウンドで起動
-          nohup java -jar /home/ec2-user/app.jar --server.port=8080 > app.log 2>&1 &
+        # 古いアプリが動いていたら終了させる
+        pgrep -f app.jar | xargs -r kill -9
+        # アプリをバックグラウンドで起動
+        nohup java -jar /home/ec2-user/app.jar --server.port=8080 > app.log 2>&1 &
         EOF
