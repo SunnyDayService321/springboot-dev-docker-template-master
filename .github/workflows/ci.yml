@@ -16,6 +16,7 @@ jobs:
 
     - name: Set up JDK 11
       uses: actions/setup-java@v4
+
       with:
         java-version: '11'       # Java 11を使用
         distribution: 'temurin'
@@ -25,3 +26,26 @@ jobs:
       # コンパイルとテストを実行して、アプリが壊れていないか確認する
       working-directory: ./volumes/app
       run: mvn -B clean package
+
+    - name: Deploy to EC2
+      # masterブランチにプッシュされた時だけ実行
+      if: github.ref == 'refs/heads/master'
+      env:
+        SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        HOST: ${{ secrets.EC2_HOST }}
+        USER: ec2-user
+      run: |
+        # 1. SSHキーの設定
+        echo "$SSH_KEY" > private_key.pem
+        chmod 600 private_key.pem
+
+        # 2. jarファイルをEC2へ送信 (volumes/app/target内のjarを指定)
+        scp -o StrictHostKeyChecking=no -i private_key.pem ./volumes/app/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
+
+        # 3. EC2上でアプリを起動（既存のプロセスを止めて再起動する例）
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ${USER}@${HOST} << 'EOF'
+          # 古いアプリが動いていたら終了させる
+          pgrep -f app.jar | xargs -r kill -9
+          # アプリをバックグラウンドで起動
+          nohup java -jar /home/ec2-user/app.jar --server.port=8080 > app.log 2>&1 &
+        EOF
