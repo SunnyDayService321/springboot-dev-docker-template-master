@@ -13,7 +13,7 @@
 
 本番環境のクラウドインフラ構成およびデプロイフローの全体図です。パブリック・プライベートサブネットを明確に分けた多層防御ネットワークと、GitHub Actionsによる安全な自動化を実現しています。
 
-![System Architecture](./images/architecture.svg)
+![System Architecture](./images/architecture.png)
 
 ---
 
