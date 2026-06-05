@@ -50,13 +50,5 @@ jobs:
         scp ./volumes/app/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
 
         # 5. アプリ起動
-        ssh ${USER}@${HOST} << 'EOF'
-          # プロジェクトのディレクトリに移動
-          cd /home/ec2-user/app-project
+        ssh -n ${USER}@${HOST} "cd /home/ec2-user/app-project && sudo docker-compose down && sudo DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d --build"
 
-          # いったん動いているコンテナを停止（ポート解放）
-          sudo docker-compose down
-
-          # 新しいイメージをビルドしつつ、バックグラウンドで一斉起動！
-          sudo DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d --build
-        EOF
