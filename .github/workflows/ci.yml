@@ -51,6 +51,12 @@ jobs:
 
         # 5. アプリ起動
         ssh ${USER}@${HOST} << 'EOF'
-          pgrep -f app.jar | xargs -r kill -9
-          nohup java -jar /home/ec2-user/app.jar --server.port=8080 > app.log 2>&1 &
+          # プロジェクトのディレクトリに移動
+          cd /home/ec2-user/app-project
+
+          # いったん動いているコンテナを停止（ポート解放）
+          sudo docker-compose down
+
+          # 新しいイメージをビルドしつつ、バックグラウンドで一斉起動！
+          sudo DOCKER_BUILDKIT=0 COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d --build
         EOF
