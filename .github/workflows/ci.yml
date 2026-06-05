@@ -45,9 +45,9 @@ jobs:
         chmod 600 ~/.ssh/id_rsa  # 権限設定
 
         # 3. 接続先を known_hosts に登録（接続時の確認をスキップするため）
-        ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+        ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts || true
         echo "=== SSH鍵の設定が完了 ==="
-        
+
         echo "=== 2. JARファイルの転送 (scp) を開始 ==="
         # 4. デプロイ実行（-i オプションなしで ~/.ssh/id_rsa が自動で使われます）
         scp ./volumes/app/target/*.jar ${USER}@${HOST}:/home/${USER}/app.jar
